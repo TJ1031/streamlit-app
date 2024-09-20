@@ -56,7 +56,6 @@ def win_probability(num_trials, switch, num_boxes, num_open, reveal_or_random_ch
         return "次に座った人が設定1だったパターンがありませんでした。"
 
 
-    return f"設定6ツモ確率: {win_count / num_trials:.2%}"
 
 st.title("設定6ツモシミュレーター")
 
