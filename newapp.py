@@ -26,14 +26,22 @@ def win_probability(num_trials, switch, num_boxes, num_open, reveal_or_random_ch
         elif reveal_or_random_choice == "次に座った人の台が設定1と判別できた場合":
             # 次に座る人は設定1を知らないので、ランダムに台を選ぶ
             remaining_boxes = [i for i in range(num_boxes) if i != my_choice]
-            random_choice = random.choice(remaining_boxes)  # 次に座る人がランダムに台を選ぶ
 
-            # 次に座った台が設定1なら、その台を開示する
-            if boxes[random_choice] == "設定1":
-                opened_boxes = [random_choice]
-                valid_trials += 1  # 有効試行回数を増やす
+            # 残りの台数が num_open より少ない場合はエラーメッセージを表示
+            if len(remaining_boxes) < num_open:
+                return "次に座る全員が設定1になるパターンがありません"
+            
+            #次に座る人たちが選ぶ台を指定された台数分ランダムに選ぶ
+            random_choices = random.sample(remaining_boxes, num_open)
+
+            #開示された台の中に設定1があるか確認
+            open_boxes = [i for i in random_choices if boxes[i] == "設定1"]
+
+            # 開示された台が指定された台数分の設定1であるかを確認
+            if len(opened_boxes) == num_open:
+                valid_trials += 1
             else:
-                # 次に座った人の台が設定1でない場合はこの試行を無視
+                #設定1に全員座っていない場合は無視
                 continue
 
         # 台移動するかどうか
