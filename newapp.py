@@ -51,7 +51,7 @@ def win_probability(num_trials, switch, num_boxes, num_open, reveal_or_random_ch
 
     # 有効な試行があった場合のみ確率を計算
     if valid_trials > 0:
-        return f"設定6ツモ確率: {win_count / valid_trials:.2%}（有効試行回数: {valid_trials}回）"
+        return f"設定6ツモ確率: {win_count / valid_trials:.2%}"  #（有効試行回数: {valid_trials}回）
     else:
         return "次に座った人が設定1だったパターンがありませんでした。"
 
