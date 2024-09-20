@@ -35,7 +35,7 @@ def win_probability(num_trials, switch, num_boxes, num_open, reveal_or_random_ch
             random_choices = random.sample(remaining_boxes, num_open)
 
             #開示された台の中に設定1があるか確認
-            open_boxes = [i for i in random_choices if boxes[i] == "設定1"]
+            opened_boxes = [i for i in random_choices if boxes[i] == "設定1"]
 
             # 開示された台が指定された台数分の設定1であるかを確認
             if len(opened_boxes) == num_open:
