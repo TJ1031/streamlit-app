@@ -16,14 +16,14 @@ def win_probability(num_trials, switch, num_boxes, num_open, reveal_or_random_ch
         orner_choices = [i for i in range(num_boxes) if i != my_choice and boxes[i] == "設定1"]
 
         # 分岐：設定1の台を開示するか、次に座った人がランダムに選ぶか
-        if reveal_or_random_choice == "店長が設定1を開示":
+        if reveal_or_random_choice == "店長が設定1を開示した場合":
             # 店長は設定1の台を知っているので、確実に設定1を開示
             if len(orner_choices) < num_open:
                 return "開示する設定1の台数が多すぎるため、条件を修正してください"
             opened_boxes = random.sample(orner_choices, num_open)
             valid_trials += 1  # 有効試行回数を増やす
 
-        elif reveal_or_random_choice == "次に座る人がランダムに選ぶ":
+        elif reveal_or_random_choice == "次に座った人の台が設定1と判別できた場合":
             # 次に座る人は設定1を知らないので、ランダムに台を選ぶ
             remaining_boxes = [i for i in range(num_boxes) if i != my_choice]
             random_choice = random.choice(remaining_boxes)  # 次に座る人がランダムに台を選ぶ
