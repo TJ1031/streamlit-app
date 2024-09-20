@@ -3,6 +3,7 @@ import random
 
 def win_probability(num_trials, switch, num_boxes, num_open, reveal_or_random_choice):
     win_count = 0
+    valid_trials = 0  # 有効試行回数（次に座った人が設定1の場合も含む）
     for _ in range(num_trials):
         # 設定1と設定6の台をランダムに配置
         boxes = ["設定1"] * (num_boxes - 1) + ["設定6"]
@@ -20,6 +21,7 @@ def win_probability(num_trials, switch, num_boxes, num_open, reveal_or_random_ch
             if len(orner_choices) < num_open:
                 return "開示する設定1の台数が多すぎるため、条件を修正してください"
             opened_boxes = random.sample(orner_choices, num_open)
+            valid_trials += 1  # 有効試行回数を増やす
 
         elif reveal_or_random_choice == "次に座る人がランダムに選ぶ":
             # 次に座る人は設定1を知らないので、ランダムに台を選ぶ
@@ -29,8 +31,10 @@ def win_probability(num_trials, switch, num_boxes, num_open, reveal_or_random_ch
             # 次に座った台が設定1なら、その台を開示する
             if boxes[random_choice] == "設定1":
                 opened_boxes = [random_choice]
+                valid_trials += 1  # 有効試行回数を増やす
             else:
-                opened_boxes = []
+                # 次に座った人の台が設定1でない場合はこの試行を無視
+                continue
 
         # 台移動するかどうか
         if switch:
@@ -44,6 +48,13 @@ def win_probability(num_trials, switch, num_boxes, num_open, reveal_or_random_ch
         # 最終的に選んだ台が設定6かどうかを確認
         if boxes[my_choice] == "設定6":
             win_count += 1
+
+    # 有効な試行があった場合のみ確率を計算
+    if valid_trials > 0:
+        return f"設定6ツモ確率: {win_count / valid_trials:.2%}（有効試行回数: {valid_trials}回）"
+    else:
+        return "次に座った人が設定1だったパターンがありませんでした。"
+
 
     return f"設定6ツモ確率: {win_count / num_trials:.2%}"
 
