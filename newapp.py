@@ -22,6 +22,16 @@ def win_probability(num_trials, switch, num_boxes, num_open):
     return f"設定6ツモ確率: {win_count / num_trials:.2%}"
 
 st.title("設定6ツモシミュレーター")
+
+# 算出条件の表示
+st.markdown("""
+### 算出条件
+- 設定6が1台入る機種1イベントを想定
+- 6が入る場所は完全ランダムなので適当に座る
+- 残りの空き台の中から指定した台数分だけ設定1の台を開示してくれる
+- この状況下で、台移動したときと台移動しなかったときのツモ確率を計算
+""")
+
 num_trials = st.number_input("試行回数", value=10000)
 num_boxes = st.number_input("設置台数", value=3)
 num_open = st.number_input("開示される設定1の台数", value=1)
