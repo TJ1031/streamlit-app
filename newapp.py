@@ -19,7 +19,7 @@ def win_probability(num_trials, switch, num_boxes, num_open):
                 return "移動先の台が存在しません"
         if boxes[my_choice] == "設定6":
             win_count += 1
-    return f"確率: {win_count / num_trials:.2%}"
+    return f"設定6ツモ確率: {win_count / num_trials:.2%}"
 
 st.title("設定6ツモシミュレーター")
 num_trials = st.number_input("試行回数", value=10000)
